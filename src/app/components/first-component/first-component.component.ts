@@ -14,9 +14,10 @@ import { FormGroup,FormControl,Validators } from '@angular/forms';
 })
 
 export class FirstComponentComponent implements OnInit  {
-  student = new Student();
-  studentForm:FormGroup;
   
+  
+  student = new Student(); //INSTANCIA DE UN OBJETO.
+  studentForm:FormGroup;
   studentsList = new Array <Student>
   
   id2 : string
@@ -29,7 +30,7 @@ export class FirstComponentComponent implements OnInit  {
 
   ngOnInit() { 
     this.studentForm= new FormGroup({ 
-      "dni": new FormControl(this.student.dni,Validators.required),
+      "dni": new FormControl(this.student.dni,Validators.required), //VALIDATORS.
       "firstName":new FormControl(this.student.firstName, Validators.required),
       "lastName":new FormControl(this.student.lastName, Validators.required),
       "email":new FormControl(this.student.email, Validators.required)
@@ -43,6 +44,8 @@ export class FirstComponentComponent implements OnInit  {
   get firstName() {return this.studentForm.get("firstName")}
   get email() {return this.studentForm.get("email")}
 
+  //CAN'T GET, VER ERROR.
+
   getAll(){
     this.studentService.getAll().subscribe(response => {
       this.studentsList = response;
@@ -53,15 +56,15 @@ export class FirstComponentComponent implements OnInit  {
 
   saveStudent(){
 
-    this.student.dni = this.dni?.value //sintaxis
+    this.student.dni = this.dni?.value 
     this.student.lastName = this.lastName?.value
     this.student.firstName = this.firstName?.value
     this.student.email = this.email?.value
     this.student.cohort = 0
-    this.student.status = 'activo'
-    this.student.gender = 'masculino'
-    this.student.address = 'abc123'
-    this.student.phone = '223000'
+    this.student.status = ''
+    this.student.gender = ''
+    this.student.address = ''
+    this.student.phone = ''
 
     this.studentService.add(this.student).subscribe(() => { 
       location.reload()
@@ -70,9 +73,7 @@ export class FirstComponentComponent implements OnInit  {
         alert('Error: ' + error.error.message)
         document.getElementsByTagName('input')[0].focus()
     })
-
   }
-
 }
 
 

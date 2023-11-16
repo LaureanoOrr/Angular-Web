@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>webAngular</title>
+  <style>
+    body {
+      font-family: 'Roboto', 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #4285f4;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+      color: #555;
+    }
+
+    tbody tr:hover {
+      background-color: #f5f5f5;
+    }
+
+    form {
+      margin-top: 20px;
+    }
+
+    input {
+      margin-bottom: 10px;
+      padding: 8px;
+    }
+
+    p {
+      color: #d32f2f;
+      margin: 0;
+    }
+
+    button {
+      background-color: #4285f4;
+      color: #fff;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #3a75c4;
+    }
+
+    .modal-body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin-top: 10px;
+    }
+
+    .modal-footer {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Tabla de Alumnos</h1>
+  </header>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>DNI</th>
+        <th>Apellido</th>
+        <th>Nombre</th>
+        <th>Correo</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let student of studentsList">
+        <td>{{ student.id }}</td>
+        <td>{{ student.dni }}</td>
+        <td>{{ student.lastName }}</td>
+        <td>{{ student.firstName }}</td>
+        <td>{{ student.email }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <form [formGroup]="studentForm">
+    <input placeholder="DNI" formControlName="dni" />
+    <p *ngIf="lastName?.touched && lastName?.errors?.required">Campo obligatorio</p>
+    <input placeholder="Nombre" formControlName="firstName" />
+    <p *ngIf="dni?.touched && dni?.errors?.required">Campo obligatorio</p>
+    <input placeholder="Apellido" formControlName="lastName" />
+    <p *ngIf="firstName?.touched && firstName?.errors?.required">Campo obligatorio</p>
+    <input placeholder="Correo" formControlName="email" />
+    <p *ngIf="email?.touched && email?.errors?.required">Campo obligatorio</p>
+    <button (click)="saveStudent()">Guardar alumno</button>
+  </form>
+
+  <ng-template #ver let-modal>
+    <div class="modal-header"></div>
+
+    <div class="modal-body">
+      <label>ID2</label>
+      <input class="form-control" [(ngModel)]="id2" readonly />
+      <label for="">DNI</label>
+      <input class="form-control" [(ngModel)]="dni2" ngbautofocus />
+      <label>Nombre</label>
+      <input class="form-control" [(ngModel)]="nombre2" />
+      <label>Apellido</label>
+      <input class="form-control" [(ngModel)]="apellido2" />
+      <label>Email</label>
+      <input class="form-control" [(ngModel)]="email2" />
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn btn-primary" (click)="modal.close()">Guardar</button>
+    </div>
+  </ng-template>
+
+
+  <footer style="background-color: #4285f4; color: #fff; text-align: center; padding: 10px;">
+    <p style="color: #fefefe; text-align: right; font:bold">LAUREANO ORR - DISEÑO WEB / TP WEB / IDRA 2023</p>  
+
+  </footer>
+
+</body>
+
+</html>

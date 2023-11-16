@@ -74,6 +74,18 @@ export class FirstComponentComponent implements OnInit  {
         document.getElementsByTagName('input')[0].focus()
     })
   }
+
+  delete(dni: number){
+
+    this.studentService.delete(dni).subscribe(() => { 
+      location.reload()
+      }, error => {
+        console.error(error);
+        alert('Error: ' + error.error.message)
+        document.getElementsByTagName('input')[0].focus()
+    })
+
+  }
 }
 
 

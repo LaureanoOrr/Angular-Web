@@ -5,7 +5,7 @@ export class Student{
     lastName:string
     firstName:string
     email:string
-    dni:string
+    dni:number
     cohort?:number 
     phone?: string
     status?:string

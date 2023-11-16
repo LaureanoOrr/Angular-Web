@@ -104,6 +104,7 @@
         <td>{{ student.lastName }}</td>
         <td>{{ student.firstName }}</td>
         <td>{{ student.email }}</td>
+        <td><button class="btn btn-secondary" (click)="delete(student.id)">-</button></td>
       </tr>
     </tbody>
   </table>

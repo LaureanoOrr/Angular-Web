@@ -59,15 +59,8 @@ body {
     background-color: #3a75c4;
   }
 
-  .modal-body {
-    display: flex;
-    flex-direction: column;
-  }
-
   label {
     margin-top: 10px;
   }
 
-  .modal-footer {
-    margin-top: 20px;
-  }
+

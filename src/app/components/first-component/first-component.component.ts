@@ -3,6 +3,7 @@ import { TestServiceService } from 'src/app/services/test-service.service';
 import {Student } from 'src/app/models/student';
 import { FormsModule  } from '@angular/forms';
 import { FormGroup,FormControl,Validators } from '@angular/forms'; 
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 // IMPORTE FORM GROUP, FORM CONTROL, VALIDATORS.
@@ -18,15 +19,15 @@ export class FirstComponentComponent implements OnInit  {
   
   student = new Student(); //INSTANCIA DE UN OBJETO.
   studentForm:FormGroup;
-  studentsList = new Array <Student>
+  studentsList = new Array <Student>()
   
-  id2 : string
-  dni2 : string
+  id2 : number
+  dni2 : number
   nombre2 : string
   apellido2 : string
   email2 : string
 
-  constructor(private studentService: TestServiceService){} 
+  constructor(private studentService: TestServiceService, private modalService: NgbModal){} 
 
   ngOnInit() { 
     this.studentForm= new FormGroup({ 
@@ -86,10 +87,34 @@ export class FirstComponentComponent implements OnInit  {
     })
 
   }
+  
+  edit(s: Student, ver: any){
+
+      this.id2 = s.id
+      this.dni2 = s.dni
+      this.nombre2 = s.firstName
+      this.apellido2 = s.lastName
+      this.email2 = s.email
+      
+      this.modalService.open(ver).result.then(() => {
+      
+
+      this.student.id = this.id2
+      this.student.dni = this.dni2
+      this.student.firstName = this.nombre2
+      this.student.lastName = this.apellido2
+      this.student.email = this.email2
+
+
+      this.studentService.update(this.student).subscribe(() => {
+        location.reload()
+      }, error => {
+        console.error(error)
+        alert('Error: ' + error.error.message)
+      })
+    })
+  }
 }
-
-
-
 
 
 

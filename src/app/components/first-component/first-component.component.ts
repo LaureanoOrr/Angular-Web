@@ -98,13 +98,16 @@ export class FirstComponentComponent implements OnInit  {
       
       this.modalService.open(ver).result.then(() => {
       
-
       this.student.id = this.id2
       this.student.dni = this.dni2
       this.student.firstName = this.nombre2
       this.student.lastName = this.apellido2
       this.student.email = this.email2
-
+      this.student.cohort = 0
+      this.student.status = ''
+      this.student.gender = ''
+      this.student.address = ''
+      this.student.phone = ''
 
       this.studentService.update(this.student).subscribe(() => {
         location.reload()
